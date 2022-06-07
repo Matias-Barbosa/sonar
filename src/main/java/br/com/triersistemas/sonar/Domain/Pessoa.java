@@ -31,9 +31,9 @@ public abstract class Pessoa {
         var rd = new SplittableRandom();
         this.nome = nomes.get(rd.nextInt(0, nomes.size()));
         this.ID = rd.nextInt(0, 200);
-        //List<Integer> IDs = new ArrayList<>();
-        //IDs.add(ID);
-        //IDs.remove(ID);
+        List<Integer> IDSemUsar = new ArrayList<>();
+        IDSemUsar.add(ID);
+        //IDSemUsar.remove(ID);
     }
 
     protected Pessoa(final String nome, final LocalDate aniver) {
