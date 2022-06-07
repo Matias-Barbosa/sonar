@@ -1,5 +1,6 @@
 package br.com.triersistemas.sonar.Model;
 
+import br.com.triersistemas.sonar.Domain.Pessoa;
 import lombok.Getter;
 
 import java.time.LocalDate;
@@ -11,5 +12,5 @@ public class FornecedorModel {
     LocalDate aniver;
     String cnpj;
     Integer ID;
-    LocalDate idade;
+    LocalDate Idade = getIdade();
 }

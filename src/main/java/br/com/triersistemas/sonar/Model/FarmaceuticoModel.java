@@ -12,5 +12,4 @@ public class FarmaceuticoModel {
     LocalDate aniver;
     String cpf;
     Integer ID;
-    LocalDate idade;
 }

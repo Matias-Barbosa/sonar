@@ -20,7 +20,7 @@ public class FarmaceuticoController {
 
     @PostMapping("/cadastrar")
     public List<Farmaceutico> cadastrar(@RequestBody FarmaceuticoModel model) {
-        LIST.add(new Farmaceutico(model.getNome(), model.getAniver(), model.getCpf(), model.getID(), model.getIdade()));
+        LIST.add(new Farmaceutico(model.getNome(), model.getAniver(), model.getCpf(), model.getID()));
         return LIST;
     }
 
