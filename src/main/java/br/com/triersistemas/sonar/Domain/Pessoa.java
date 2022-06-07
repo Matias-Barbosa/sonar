@@ -31,8 +31,8 @@ public abstract class Pessoa {
         var rd = new SplittableRandom();
         this.nome = nomes.get(rd.nextInt(0, nomes.size()));
         this.ID = rd.nextInt(0, 200);
-        List<Integer> IDs = new ArrayList<>();
-        IDs.add(ID);
+        //List<Integer> IDs = new ArrayList<>();
+        //IDs.add(ID);
         //IDs.remove(ID);
     }
 
@@ -95,5 +95,9 @@ public abstract class Pessoa {
         return digitos.stream()
                 .map(Object::toString)
                 .reduce("", (p, e) -> p + e);
+    }
+
+    public int getID() {
+        return ID;
     }
 }

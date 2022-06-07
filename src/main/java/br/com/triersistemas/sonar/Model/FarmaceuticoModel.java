@@ -8,8 +8,8 @@ import java.time.LocalDate;
 @Getter
 public class FarmaceuticoModel {
 
-    String nome;
-    LocalDate aniver;
-    String cpf;
-    Integer ID;
+    private String nome;
+    private LocalDate aniver;
+    private String cpf;
+    private int ID;
 }

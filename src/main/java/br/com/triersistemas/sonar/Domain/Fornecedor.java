@@ -12,7 +12,7 @@ public class Fornecedor extends PessoaJuridica{
         this.geraListaProdutos();
     }
 
-    public Fornecedor(final String nome, final LocalDate aniver, final String cnpj, int id) {
+    public Fornecedor(final String nome, final LocalDate aniver, final String cnpj, final int id) {
         this.geraListaProdutos();
     }
 
