@@ -13,40 +13,42 @@ import java.util.UUID;
 @RequestMapping("/farmaceutico")
 public class FarmaceuticoController {
 
-    private final static List<Farmaceutico> LIST = new ArrayList<>();
+    private static final List<Farmaceutico> LIST = new ArrayList<>();
 
     @GetMapping("/consultar")
     public List<Farmaceutico> consultar() {
         return LIST;
     }
 
+    @PostMapping("/cadastrar-randon")
+    public List<Farmaceutico> cadastrarRandon() {
+        LIST.add(new Farmaceutico());
+        return LIST;
+    }
+
     @PostMapping("/cadastrar")
     public List<Farmaceutico> cadastrar(@RequestBody FarmaceuticoModel model) {
-        LIST.add(new Farmaceutico(model.getNome(), model.getAniver(), model.getCpf(), model.getID()));
+        LIST.add(new Farmaceutico(model.getNome(), model.getAniver(), model.getCpf()));
         return LIST;
     }
 
-    @PostMapping("/cadastrar-random")
-    public List<Farmaceutico> cadastrarRandon() {
-        LIST.add((new Farmaceutico()));
-        return LIST;
-    }
-
-
-    @DeleteMapping("/alterar/{id}")
+    @PutMapping("/alterar/{id}")
     public List<Farmaceutico> remover(@PathVariable UUID id, @RequestBody FarmaceuticoModel model) {
-        var contato = LIST.stream()
-                .filter(x -> x.getID().equals(id))
+        var domain = LIST.stream()
+                .filter(x -> x.getId().equals(id))
                 .findFirst()
                 .orElseThrow(NaoExisteException::new);
-        LIST.remove(contato);
+        domain.editar(model.getNome(), model.getAniver(), model.getCpf());
         return LIST;
     }
 
     @DeleteMapping("/remover/{id}")
     public List<Farmaceutico> remover(@PathVariable UUID id) {
-        LIST.remove(index);
+        var domain = LIST.stream()
+                .filter(x -> x.getId().equals(id))
+                .findFirst()
+                .orElseThrow(NaoExisteException::new);
+        LIST.remove(domain);
         return LIST;
     }
-
 }
