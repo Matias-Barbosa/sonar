@@ -2,7 +2,7 @@ package br.com.triersistemas.sonar.Controller;
 
 
 import br.com.triersistemas.sonar.Domain.Produto;
-import br.com.triersistemas.sonar.Exception.NaoExisteException;
+import br.com.triersistemas.sonar.Exceptions.NaoExisteException;
 import br.com.triersistemas.sonar.Model.ProdutoModel;
 import org.springframework.web.bind.annotation.*;
 
