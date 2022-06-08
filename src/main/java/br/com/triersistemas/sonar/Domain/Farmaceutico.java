@@ -3,9 +3,6 @@ package br.com.triersistemas.sonar.Domain;
 import br.com.triersistemas.sonar.helper.StringUtils;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.SplittableRandom;
 
 public class Farmaceutico extends PessoaFisica {
 

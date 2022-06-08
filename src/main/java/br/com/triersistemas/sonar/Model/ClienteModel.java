@@ -1,14 +1,14 @@
 package br.com.triersistemas.sonar.Model;
 
+
 import lombok.Getter;
 
-import java.time.LocalDate;
+import java.util.UUID;
 
 @Getter
-public class FarmaceuticoModel {
+public class ClienteModel {
 
     private String nome;
-    private LocalDate aniver;
-    private String cpf;
     private int ID;
+    private String cpf;
 }
