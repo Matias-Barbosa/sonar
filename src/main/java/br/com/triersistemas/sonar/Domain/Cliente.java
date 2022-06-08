@@ -1,11 +1,8 @@
 package br.com.triersistemas.sonar.Domain;
 
-import br.com.triersistemas.sonar.helper.StringUtils;
-
-import java.time.LocalDate;
 import java.util.UUID;
 
-public class Cliente extends Pessoa{
+public class Cliente extends PessoaFisica{
 
     private String nome;
     private UUID id;
@@ -18,13 +15,16 @@ public class Cliente extends Pessoa{
 
     }
 
-    @Override
-    public String getDocumento() {
-        return cpf;
+    public Cliente(String nome, UUID id, String cpf) {
+        this.nome = nome;
+        this.id = id;
+        this.cpf = cpf;
     }
 
-    @Override
-    public Boolean getDocumentoValido() {
-        return null;
+    public void editar(String nome, UUID id, String cpf) {
+    }
+
+    public UUID getId() {
+    return id;
     }
 }
