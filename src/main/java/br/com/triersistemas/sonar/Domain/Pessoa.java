@@ -3,17 +3,14 @@ package br.com.triersistemas.sonar.Domain;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.SplittableRandom;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class Pessoa {
     private String nome;
     private LocalDate aniver;
 
-    private int ID;
+    private UUID ID;
 
     protected Pessoa() {
         this.aniver = LocalDate.now();
@@ -30,10 +27,9 @@ public abstract class Pessoa {
         nomes.add("Edward");
         var rd = new SplittableRandom();
         this.nome = nomes.get(rd.nextInt(0, nomes.size()));
-        this.ID = rd.nextInt(0, 200);
-        List<Integer> IDSemUsar = new ArrayList<>();
-        IDSemUsar.add(ID);
-        //IDSemUsar.remove(ID);
+        this.ID = UUID.randomUUID();
+
+
     }
 
     protected Pessoa(final String nome, final LocalDate aniver) {
@@ -97,7 +93,7 @@ public abstract class Pessoa {
                 .reduce("", (p, e) -> p + e);
     }
 
-    public int getID() {
+    public UUID getID() {
         return ID;
     }
 }

@@ -1,11 +1,13 @@
 package br.com.triersistemas.sonar.Controller;
 
 import br.com.triersistemas.sonar.Domain.Farmaceutico;
+import br.com.triersistemas.sonar.Exception.NaoExisteException;
 import br.com.triersistemas.sonar.Model.FarmaceuticoModel;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/farmaceutico")
@@ -24,24 +26,27 @@ public class FarmaceuticoController {
         return LIST;
     }
 
-        @PostMapping("/cadastrar-random")
-        public List<Farmaceutico> cadastrarRandon() {
-            LIST.add((new Farmaceutico()));
-            return LIST;
-        }
-
-
-        @DeleteMapping("/alterar/{index}")
-        public List<Farmaceutico> remover (@PathVariable Integer index, @RequestBody FarmaceuticoModel model){
-            var contato = LIST.get(index);
-            LIST.remove(contato);
-            return LIST;
-        }
-
-        @DeleteMapping("/remover/{index}")
-        public List<Farmaceutico> remover ( @PathVariable int index){
-            LIST.remove(index);
-            return LIST;
-        }
-
+    @PostMapping("/cadastrar-random")
+    public List<Farmaceutico> cadastrarRandon() {
+        LIST.add((new Farmaceutico()));
+        return LIST;
     }
+
+
+    @DeleteMapping("/alterar/{id}")
+    public List<Farmaceutico> remover(@PathVariable UUID id, @RequestBody FarmaceuticoModel model) {
+        var contato = LIST.stream()
+                .filter(x -> x.getID().equals(id))
+                .findFirst()
+                .orElseThrow(NaoExisteException::new);
+        LIST.remove(contato);
+        return LIST;
+    }
+
+    @DeleteMapping("/remover/{id}")
+    public List<Farmaceutico> remover(@PathVariable UUID id) {
+        LIST.remove(index);
+        return LIST;
+    }
+
+}
