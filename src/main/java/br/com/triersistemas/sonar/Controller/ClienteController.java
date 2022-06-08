@@ -1,7 +1,8 @@
 package br.com.triersistemas.sonar.Controller;
 
 import br.com.triersistemas.sonar.Domain.Cliente;
-import br.com.triersistemas.sonar.Exception.NaoExisteException;
+import br.com.triersistemas.sonar.Domain.Produto;
+import br.com.triersistemas.sonar.Exceptions.NaoExisteException;
 import br.com.triersistemas.sonar.Model.ClienteModel;
 import br.com.triersistemas.sonar.Model.ProdutoModel;
 import org.springframework.web.bind.annotation.*;
@@ -21,15 +22,15 @@ public class ClienteController {
         return LISTACLIENTES;
     }
 
-    @PostMapping("/cadastrar-randon")
-    public List<Cliente> cadastrarRandon(@RequestBody ClienteModel model) {
+    @PostMapping("/cadastrar-random")
+    public List<Cliente> cadastrarRandon() {
         LISTACLIENTES.add(new Cliente());
         return LISTACLIENTES;
     }
 
     @PostMapping("/cadastrar")
     public List<Cliente> cadastrar(@RequestBody ClienteModel model) {
-        LISTACLIENTES.add(new Cliente());
+        LISTACLIENTES.add(new Cliente(model.getNome(), model.getID(), model.getCpf()));
         return LISTACLIENTES;
     }
 
