@@ -10,7 +10,7 @@ public class Pedido {
     private String nome;
     private UUID id;
     private List<String> listaPedidos;
-    private String cliente;
+    private Cliente cliente;
     private double valor;
 
 
@@ -19,7 +19,7 @@ public class Pedido {
         this.nome = StringUtils.getRandomMedicine();
         this.valor = StringUtils.getValor();
         this.listaPedidos = StringUtils.getRandomListMedicine();
-        this.cliente = nome;
+        this.cliente = new Cliente();
 
     }
 
@@ -27,7 +27,7 @@ public class Pedido {
         this.id = id;
         this.nome = nome;
         this.valor = valor;
-        this.cliente = cliente;
+        this.cliente = new Cliente();
         this.listaPedidos = listaPedidos;
     }
 
@@ -45,6 +45,10 @@ public class Pedido {
 
     public List<String> getLista() {
         return listaPedidos;
+    }
+
+    public Cliente getCliente() {
+        return new Cliente();
     }
 
     public void editar(String nome, int valor, String cliente, UUID id, List<String> listaPedidos) {
