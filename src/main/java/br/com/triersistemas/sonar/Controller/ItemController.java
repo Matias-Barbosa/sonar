@@ -1,6 +1,5 @@
 package br.com.triersistemas.sonar.Controller;
 
-
 import br.com.triersistemas.sonar.Domain.Produto;
 import br.com.triersistemas.sonar.Exception.NaoExisteException;
 import br.com.triersistemas.sonar.Model.ProdutoModel;
@@ -10,9 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@RestController
-@RequestMapping("/produto")
-public class ProdutoController {
+public class ItemController {
 
     public static final List<Produto> LIST = new ArrayList<>();
 
@@ -46,4 +43,5 @@ public class ProdutoController {
         LIST.remove(domain);
         return domain;
     }
+}
 }

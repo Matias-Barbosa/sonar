@@ -1,55 +1,72 @@
 package br.com.triersistemas.sonar.Controller;
 
 import br.com.triersistemas.sonar.Domain.Pedido;
+import br.com.triersistemas.sonar.Domain.Produto;
 import br.com.triersistemas.sonar.Exception.NaoExisteException;
+import br.com.triersistemas.sonar.Model.AdicionarPedidoModel;
+import br.com.triersistemas.sonar.Model.PagarPedidoModel;
 import br.com.triersistemas.sonar.Model.PedidoModel;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/Pedido")
+@RequestMapping("/pedido")
 public class PedidoController {
 
-    private static final List<Pedido> LISTAPEDIDOS = new ArrayList<>();
+    public static final List<Pedido> LIST = new ArrayList<>();
 
     @GetMapping("/consultar")
     public List<Pedido> consultar() {
-        return LISTAPEDIDOS;
-    }
-
-    @PostMapping("/cadastrar-random")
-    public List<Pedido> cadastrarRandon() {
-        LISTAPEDIDOS.add(new Pedido());
-        return LISTAPEDIDOS;
+        return LIST;
     }
 
     @PostMapping("/cadastrar")
-    public List<Pedido> cadastrar(@RequestBody PedidoModel model) {
-        LISTAPEDIDOS.add(new Pedido(model.getNome(), model.getValor(), model.getId(), model.getCliente(), model.getListaPedidos()));
-        return LISTAPEDIDOS;
+    public Pedido cadastrar(@RequestBody PedidoModel model) {
+
+        var farmaceutico = FarmaceuticoController.LIST.stream()
+                .filter(f -> f.getId().equals(model.getIdFarmaceutico()))
+                .findFirst()
+                .orElseThrow(NaoExisteException::new);
+
+        var cliente = ClienteController.LIST.stream()
+                .filter(f -> f.getId().equals(model.getIdCliente()))
+                .findFirst()
+                .orElseThrow(NaoExisteException::new);
+
+        var domain = new Pedido(farmaceutico, cliente);
+        LIST.add(domain);
+        return domain;
     }
 
-    @PutMapping("/alterar/{id}")
-    public List<Pedido> remover(@PathVariable UUID id, @RequestBody PedidoModel model) {
-        var domain = LISTAPEDIDOS.stream()
+    @PutMapping("/adicionar-produtos/{id}")
+    public Pedido adicionarProdutos(@PathVariable UUID id, @RequestBody AdicionarPedidoModel model) {
+        var pedido = LIST.stream()
                 .filter(x -> x.getId().equals(id))
                 .findFirst()
                 .orElseThrow(NaoExisteException::new);
-        domain.editar(model.getNome(), model.getValor(), model.getCliente(), model.getId(), model.getListaPedidos());
-        return LISTAPEDIDOS;
+
+        var produtos = model.getIdProdutos()
+                .stream()
+                .map(idProduto -> {
+                    return ProdutoController.LIST.stream()
+                            .filter(x -> x.getId().equals(idProduto))
+                            .findFirst()
+                            .orElseThrow(NaoExisteException::new);
+                }).collect(Collectors.toList());
+
+        return pedido.adicionarProdutos(produtos);
     }
 
-    @DeleteMapping("/remover/{id}")
-    public List<Pedido> remover(@PathVariable UUID id) {
-        var domain = LISTAPEDIDOS.stream()
+    @PutMapping("/pagar/{id}")
+    public Pedido pagar(@PathVariable UUID id, @RequestBody PagarPedidoModel model) {
+        var pedido = LIST.stream()
                 .filter(x -> x.getId().equals(id))
                 .findFirst()
                 .orElseThrow(NaoExisteException::new);
-        LISTAPEDIDOS.remove(domain);
-        return LISTAPEDIDOS;
+        return pedido.pagar(model.getValor());
     }
 }

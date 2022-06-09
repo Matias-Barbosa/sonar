@@ -17,7 +17,6 @@ public abstract class PessoaFisica extends Pessoa {
         super(nome, aniver);
         this.cpf = StringUtils.extractNumbers(cpf);
     }
-    
 
     public void editar(final String nome, final LocalDate aniver, final String cpf) {
         super.editar(nome, aniver);

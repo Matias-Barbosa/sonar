@@ -10,5 +10,4 @@ public class FarmaceuticoModel {
     private String nome;
     private LocalDate aniver;
     private String cpf;
-    private int ID;
 }

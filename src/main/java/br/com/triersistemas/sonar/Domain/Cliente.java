@@ -1,30 +1,25 @@
 package br.com.triersistemas.sonar.Domain;
 
-import java.util.UUID;
+import lombok.Getter;
 
-public class Cliente extends PessoaFisica{
+import java.time.LocalDate;
 
-    private String nome;
-    private UUID id;
-    private String cpf;
+@Getter
+public class Cliente extends PessoaFisica {
 
-    public Cliente() {
-        this.id = UUID.randomUUID();
-        this.cpf = cpf;
-        this.nome = nome;
+    private String email;
 
+    public Cliente(final String nome,
+                   final LocalDate aniver,
+                   final String cpf,
+                   final String email) {
+        super(nome, aniver, cpf);
+        this.email = email;
     }
 
-    public Cliente(String nome, UUID id, String cpf) {
-        this.nome = nome;
-        this.id = id;
-        this.cpf = cpf;
-    }
-
-    public void editar(String nome, UUID id, String cpf) {
-    }
-
-    public UUID getId() {
-        return id;
+    public Cliente editar(final String nome, final LocalDate aniver, final String cpf, final String email) {
+        super.editar(nome, aniver, cpf);
+        this.email = email;
+        return this;
     }
 }

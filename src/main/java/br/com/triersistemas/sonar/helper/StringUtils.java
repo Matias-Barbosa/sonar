@@ -84,8 +84,4 @@ public class StringUtils {
                 .map(Object::toString)
                 .reduce("", (p, e) -> p + e);
     }
-    public static double getValor() {
-        var rd = new SplittableRandom();
-        return rd.nextInt(0, 200);
-    }
 }
