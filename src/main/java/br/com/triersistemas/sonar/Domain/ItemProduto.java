@@ -15,7 +15,7 @@ public class ItemProduto {
 
     private BigDecimal valor;
 
-    public ItemProduto(int quantidade, BigDecimal valor) {
+    public ItemProduto(final Produto produto,final int quantidade) {
         this.produto = StringUtils.getRandomMedicine();
         this.quantidade = quantidade;
         this.valor = valor;
