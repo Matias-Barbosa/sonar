@@ -25,6 +25,6 @@ public class Cliente extends PessoaFisica{
     }
 
     public UUID getId() {
-    return id;
+        return id;
     }
 }

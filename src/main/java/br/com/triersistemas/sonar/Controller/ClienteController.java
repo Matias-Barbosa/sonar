@@ -4,7 +4,6 @@ import br.com.triersistemas.sonar.Domain.Cliente;
 import br.com.triersistemas.sonar.Domain.Produto;
 import br.com.triersistemas.sonar.Exceptions.NaoExisteException;
 import br.com.triersistemas.sonar.Model.ClienteModel;
-import br.com.triersistemas.sonar.Model.ProdutoModel;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
