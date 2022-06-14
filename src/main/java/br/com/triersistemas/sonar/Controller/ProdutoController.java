@@ -1,12 +1,11 @@
 package br.com.triersistemas.sonar.Controller;
 
-
 import br.com.triersistemas.sonar.Domain.Produto;
-import br.com.triersistemas.sonar.Exception.NaoExisteException;
 import br.com.triersistemas.sonar.Model.ProdutoModel;
+import br.com.triersistemas.sonar.service.ProdutoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -14,36 +13,26 @@ import java.util.UUID;
 @RequestMapping("/produto")
 public class ProdutoController {
 
-    public static final List<Produto> LIST = new ArrayList<>();
+    @Autowired
+    private ProdutoService produtoService;
 
     @GetMapping("/consultar")
     public List<Produto> consultar() {
-        return LIST;
+        return produtoService.consultar();
     }
 
     @PostMapping("/cadastrar")
     public Produto cadastrar(@RequestBody ProdutoModel model) {
-        var domain = new Produto(model.getNome(), model.getValor());
-        LIST.add(domain);
-        return domain;
+        return produtoService.cadastrar(model);
     }
 
     @PutMapping("/alterar/{id}")
-    public Produto remover(@PathVariable UUID id, @RequestBody ProdutoModel model) {
-        var domain = LIST.stream()
-                .filter(x -> x.getId().equals(id))
-                .findFirst()
-                .orElseThrow(NaoExisteException::new);
-        return domain.editar(model.getNome(), model.getValor());
+    public Produto alterar(@PathVariable UUID id, @RequestBody ProdutoModel model) {
+        return produtoService.alterar(id, model);
     }
 
     @DeleteMapping("/remover/{id}")
     public Produto remover(@PathVariable UUID id) {
-        var domain = LIST.stream()
-                .filter(x -> x.getId().equals(id))
-                .findFirst()
-                .orElseThrow(NaoExisteException::new);
-        LIST.remove(domain);
-        return domain;
+        return produtoService.remover(id);
     }
 }

@@ -1,7 +1,6 @@
 package br.com.triersistemas.sonar.Controller;
 
 import br.com.triersistemas.sonar.Domain.Pedido;
-import br.com.triersistemas.sonar.Domain.Produto;
 import br.com.triersistemas.sonar.Exception.NaoExisteException;
 import br.com.triersistemas.sonar.Model.AdicionarPedidoModel;
 import br.com.triersistemas.sonar.Model.PagarPedidoModel;
